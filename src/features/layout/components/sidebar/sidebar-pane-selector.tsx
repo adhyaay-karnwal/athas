@@ -1,4 +1,4 @@
-import { Folder, GitBranch, GitPullRequest, Search } from "lucide-react";
+import { Cpu, Folder, GitBranch, GitPullRequest, Search } from "lucide-react";
 import type { CoreFeaturesState } from "@/features/settings/types/feature";
 import Tooltip from "@/ui/tooltip";
 import Button from "../../../../ui/button";
@@ -7,18 +7,20 @@ interface SidebarPaneSelectorProps {
   isGitViewActive: boolean;
   isSearchViewActive: boolean;
   isGitHubPRsViewActive: boolean;
+  isHardwareDocsViewActive: boolean;
   coreFeatures: CoreFeaturesState;
-  onViewChange: (view: "files" | "git" | "search" | "github-prs") => void;
+  onViewChange: (view: "files" | "git" | "search" | "github-prs" | "hardware-docs") => void;
 }
 
 export const SidebarPaneSelector = ({
   isGitViewActive,
   isSearchViewActive,
   isGitHubPRsViewActive,
+  isHardwareDocsViewActive,
   coreFeatures,
   onViewChange,
 }: SidebarPaneSelectorProps) => {
-  const isFilesActive = !isGitViewActive && !isSearchViewActive && !isGitHubPRsViewActive;
+  const isFilesActive = !isGitViewActive && !isSearchViewActive && !isGitHubPRsViewActive && !isHardwareDocsViewActive;
 
   return (
     <div className="flex gap-0.5 border-border border-b bg-secondary-bg px-1.5 py-0.5">
@@ -103,6 +105,25 @@ export const SidebarPaneSelector = ({
           </Button>
         </Tooltip>
       )}
+
+      <Tooltip content="Hardware Documentation" side="right">
+        <Button
+          aria-role="tab"
+          aria-selected={isHardwareDocsViewActive}
+          aria-label="Hardware Documentation"
+          onClick={() => onViewChange("hardware-docs")}
+          variant="ghost"
+          size="sm"
+          data-active={isHardwareDocsViewActive}
+          className={`flex h-6 w-6 items-center justify-center rounded p-0 text-xs ${
+            isHardwareDocsViewActive
+              ? "bg-selected text-text"
+              : "text-text-lighter hover:bg-hover hover:text-text"
+          }`}
+        >
+          <Cpu size={14} />
+        </Button>
+      </Tooltip>
     </div>
   );
 };

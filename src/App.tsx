@@ -18,7 +18,7 @@ import {
   cleanupFileWatcherListener,
   initializeFileWatcherListener,
 } from "./features/file-system/controllers/file-watcher-store";
-import { MainLayout } from "./features/layout/components/main-layout";
+import { HardwareLayout } from "./features/layout/components/hardware-layout";
 import { ZoomIndicator } from "./features/layout/components/zoom-indicator";
 import { useZoomStore } from "./stores/zoom-store";
 import { ToastContainer } from "./ui/toast";

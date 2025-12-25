@@ -6,6 +6,7 @@ import { AGENT_OPTIONS, type AgentType } from "@/features/ai/types/ai-chat";
 import Tooltip from "@/ui/tooltip";
 import { cn } from "@/utils/cn";
 import { useAIChatStore } from "../../store/store";
+import { SessionModeSelector } from "./session-mode-selector";
 
 type PackageManager = "bun" | "npm" | "pnpm" | "yarn";
 

@@ -1,34 +1,37 @@
 <div align="center">
-  <img src="public/icon.png" alt="Athas" width="120">
-  <h1>Athas</h1>
-  <p>A lightweight, cross-platform code editor, built with <a href="https://tauri.app/" title="Tauri">Tauri</a> (Rust and React) with Git support, AI agents, vim keybindings.</p>
-  <img src="public/screenshot.png" alt="Athas Screenshot" width="800">
+  <img src="public/icon.png" alt="Wind" width="120">
+  <h1>Wind</h1>
+  <p>Wind - AI Hardware Integrated Development Environment (HIDE). A cross-platform desktop app that orchestrates AI agents across hardware creation tasks including 3D modeling, PCB design, firmware development, testing, and debugging.</p>
+  <img src="public/screenshot.png" alt="Wind Screenshot" width="800">
 </div>
 
 ## Features
 
-- External editor support (Neovim, Helix, etc.)
+- AI-driven hardware engineering agent
+- Hardware documentation management (datasheets, reference manuals, schematics)
+- 3D model and PCB design viewers
+- Firmware development for embedded systems
+- Hardware testing and simulation
 - Git integration
-- AI agents
-- Terminal
+- Terminal with external editor support
+- Context-aware AI assistance for hardware projects
 
-## Download
+## Hardware Capabilities
 
-Get the latest version from the [releases page](https://github.com/athasdev/athas/releases).
+- Extract register maps and timing constraints from datasheets
+- Generate firmware code with hardware-specific context
+- Debug hardware through bit-level access
+- Design and validate PCB layouts
+- Simulate and test hardware configurations
+- Manage comprehensive hardware documentation
 
 ## Documentation
 
-See the [documentation](https://athas.dev/docs).
+See the [documentation](docs/).
 
 ## Contributing
 
 Contributions are welcome! See the [contributing guide](CONTRIBUTING.md).
-
-## Support
-
-- [Issues](https://github.com/athasdev/athas/issues)
-- [Discussions](https://github.com/athasdev/athas/discussions)
-- [Discord](https://discord.gg/55nmWmQwKw)
 
 ## License
 

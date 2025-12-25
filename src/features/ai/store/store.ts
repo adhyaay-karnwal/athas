@@ -18,7 +18,16 @@ import {
   loadChatFromDb,
   saveChatToDb,
 } from "@/utils/chat-history-db";
+import type { SessionMode } from "@/features/hardware-ai/lib/hardware-slash-commands";
 import type { AIChatActions, AIChatState } from "./types";
+
+const HARDWARE_SESSION_MODES = [
+  { id: "firmware-dev", name: "Firmware", description: "Firmware Development" },
+  { id: "hardware-design", name: "Hardware", description: "Hardware Design" },
+  { id: "testing-verification", name: "Testing", description: "Testing and Verification" },
+  { id: "debugging", name: "Debugging", description: "Hardware Debugging" },
+  { id: "full-stack-hardware", name: "Full-Stack", description: "Full-Stack Hardware Engineering" },
+];
 
 export const useAIChatStore = create<AIChatState & AIChatActions>()(
   immer(

@@ -14,6 +14,7 @@ import ChatHistorySidebar from "../history/sidebar";
 import AIChatInputBar from "../input/chat-input-bar";
 import { ChatHeader } from "./chat-header";
 import { ChatMessages } from "./chat-messages";
+import type { HardwareContext as HardwareContextType } from "@/features/hardware-ai/lib/hardware-context-builder";
 
 const AIChat = memo(function AIChat({
   className,
@@ -22,6 +23,7 @@ const AIChat = memo(function AIChat({
   selectedFiles = [],
   allProjectFiles = [],
   onApplyCode,
+  hardwareContext,
 }: AIChatProps) {
   const { rootFolderPath } = useProjectStore();
   const { settings } = useSettingsStore();
@@ -79,6 +81,18 @@ const AIChat = memo(function AIChat({
       projectRoot: rootFolderPath,
       providerId: settings.aiProviderId,
     };
+
+    // Add hardware context to conversation if available and mode is hardware
+    if (hardwareContext) {
+      context.hardwareContext = {
+        documentationContext: hardwareContext.documentationContext,
+        firmwareFiles: hardwareContext.firmwareFiles,
+        pcbFiles: hardwareContext.pcbFiles,
+        schematics: hardwareContext.schematics,
+        testResults: hardwareContext.testResults,
+        summary: hardwareContext.summary,
+      };
+    }
 
     if (activeBuffer && !activeBuffer.isWebViewer) {
       const extension = activeBuffer.path.split(".").pop()?.toLowerCase() || "";

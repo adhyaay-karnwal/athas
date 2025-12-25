@@ -63,6 +63,10 @@ export interface AIChatState {
     currentModeId: string | null;
     availableModes: SessionMode[];
   };
+  
+  // Hardware session mode actions
+  setSessionMode: (modeId: string) => void;
+  getSessionModePrompt: () => string;
 }
 
 export interface AIChatActions {

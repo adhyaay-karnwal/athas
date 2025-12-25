@@ -5,6 +5,7 @@ import type { FileEntry } from "@/features/file-system/types/app";
 import GitHubPRsView from "@/features/github/components/github-prs-view";
 import { useSettingsStore } from "@/features/settings/store";
 import GitView from "@/features/version-control/git/components/view";
+import { HardwareDocsPanel } from "@/features/hardware-docs/components/hardware-docs-panel";
 import { useSearchViewStore } from "@/stores/search-view-store";
 import { useSidebarStore } from "@/stores/sidebar-store";
 import { useUIState } from "@/stores/ui-state-store";
@@ -31,7 +32,7 @@ const flattenFileTree = (files: FileEntry[]): FileEntry[] => {
 
 export const MainSidebar = memo(() => {
   // Get state from stores
-  const { isGitViewActive, isSearchViewActive, isGitHubPRsViewActive, setActiveView } =
+  const { isGitViewActive, isSearchViewActive, isGitHubPRsViewActive, isHardwareDocsViewActive, setActiveView } =
     useUIState();
 
   // Ref for SearchView to enable focus functionality
@@ -91,6 +92,7 @@ export const MainSidebar = memo(() => {
         isGitViewActive={isGitViewActive}
         isSearchViewActive={isSearchViewActive}
         isGitHubPRsViewActive={isGitHubPRsViewActive}
+        isHardwareDocsViewActive={isHardwareDocsViewActive}
         coreFeatures={settings.coreFeatures}
         onViewChange={setActiveView}
       />
@@ -123,10 +125,14 @@ export const MainSidebar = memo(() => {
           </div>
         )}
 
+        <div className={cn("h-full", !isHardwareDocsViewActive && "hidden")}>
+          <HardwareDocsPanel />
+        </div>
+
         <div
           className={cn(
             "h-full",
-            (isGitViewActive || isSearchViewActive || isGitHubPRsViewActive) && "hidden",
+            (isGitViewActive || isSearchViewActive || isGitHubPRsViewActive || isHardwareDocsViewActive) && "hidden",
           )}
         >
           {isFileTreeLoading ? (

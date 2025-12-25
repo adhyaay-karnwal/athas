@@ -1,15 +1,15 @@
 [package]
-name = "athas-code"
+name = "wind"
 version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
+description = "Wind - AI Hardware Integrated Development Environment"
+authors = ["Wind"]
 edition = "2024"
 
 [lints]
 workspace = true
 
 [lib]
-name = "athas_text_lib"
+name = "wind_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]

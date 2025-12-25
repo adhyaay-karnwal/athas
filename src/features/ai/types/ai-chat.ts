@@ -100,6 +100,14 @@ export interface ContextInfo {
   projectRoot?: string;
   language?: string;
   providerId?: string;
+  hardwareContext?: {
+    documentationContext: string;
+    firmwareFiles: string[];
+    pcbFiles: string[];
+    schematics: string[];
+    testResults: string[];
+    summary: string;
+  };
 }
 
 export interface AIChatProps {
@@ -109,7 +117,9 @@ export interface AIChatProps {
   buffers?: Buffer[];
   selectedFiles?: string[];
   allProjectFiles?: FileEntry[];
-  mode: "chat";
+  mode: "chat" | "hardware";
+  // Hardware context for hardware mode
+  hardwareContext?: import("../../hardware-ai/lib/hardware-context-builder").HardwareContext | null;
   // Buffer update functions
   onApplyCode?: (code: string) => void;
 }

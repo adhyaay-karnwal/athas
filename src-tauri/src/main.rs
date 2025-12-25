@@ -224,8 +224,8 @@ fn main() {
                   "help" => {
                      let _ = window.emit("menu_help", ());
                   }
-                  "about_athas" => {
-                     let _ = window.emit("menu_about_athas", ());
+                  "about_wind" => {
+                     let _ = window.emit("menu_about_wind", ());
                   }
                   // Window menu items
                   "minimize_window" => {
@@ -264,6 +264,12 @@ fn main() {
          move_file,
          rename_file,
          get_symlink_info,
+         // Hardware documentation commands
+         extract_document_metadata,
+         extract_hardware_data,
+         // Hardware viewer commands
+         load_3d_model,
+         load_pcb_design,
          // Git commands
          git_status,
          git_add,
