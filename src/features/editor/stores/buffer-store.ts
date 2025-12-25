@@ -29,6 +29,9 @@ export interface Buffer {
   isExternalEditor: boolean;
   isWebViewer: boolean;
   isPullRequest: boolean;
+  is3DModel: boolean;
+  isPcbViewer: boolean;
+  isTestResult: boolean;
   isActive: boolean;
   language?: string; // File language for syntax highlighting and formatting
   // For diff buffers, store the parsed diff data (single or multi-file)
@@ -41,6 +44,12 @@ export interface Buffer {
   webViewerUrl?: string;
   // For PR buffers, store the PR number
   prNumber?: number;
+  // For 3D model buffers
+  modelData?: unknown;
+  // For PCB viewer buffers
+  pcbData?: unknown;
+  // For test result buffers
+  testData?: unknown;
   // Cached syntax highlighting tokens
   tokens: {
     start: number;
@@ -236,6 +245,9 @@ export const useBufferStore = createSelectors(
             isExternalEditor: false,
             isWebViewer: false,
             isPullRequest: false,
+            is3DModel: false,
+            isPcbViewer: false,
+            isTestResult: false,
             isActive: true,
             language: detectLanguageFromFileName(name),
             diffData,

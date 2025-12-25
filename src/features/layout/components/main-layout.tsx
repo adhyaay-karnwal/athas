@@ -26,6 +26,9 @@ import VimCommandBar from "@/features/vim/components/vim-command-bar";
 import { useVimKeyboard } from "@/features/vim/hooks/use-vim-keyboard";
 import { useVimStore } from "@/features/vim/stores/vim-store";
 import { WebViewer } from "@/features/web-viewer/components/web-viewer";
+import { ThreeDModelViewer } from "@/features/hardware-viewer/components/three-d-model-viewer";
+import { PcbViewer } from "@/features/hardware-viewer/components/pcb-viewer";
+import { TestResultViewer } from "@/features/hardware-viewer/components/test-result-viewer";
 import { useMenuEventsWrapper } from "@/features/window/hooks/use-menu-events-wrapper";
 import { useFolderDrop } from "@/hooks/use-folder-drop";
 import { useUIState } from "@/stores/ui-state-store";
@@ -263,6 +266,12 @@ export function MainLayout() {
                   );
                 } else if (activeBuffer.isWebViewer && activeBuffer.webViewerUrl) {
                   return <WebViewer url={activeBuffer.webViewerUrl} bufferId={activeBuffer.id} />;
+                } else if (activeBuffer.is3DModel) {
+                  return <ThreeDModelViewer filePath={activeBuffer.path} />;
+                } else if (activeBuffer.isPcbViewer) {
+                  return <PcbViewer filePath={activeBuffer.path} pcbData={activeBuffer.pcbData} />;
+                } else if (activeBuffer.isTestResult) {
+                  return <TestResultViewer testData={activeBuffer.testData} />;
                 } else {
                   return <CodeEditor />;
                 }
