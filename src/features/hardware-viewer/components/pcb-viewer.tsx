@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Cpu, Layers, Zap } from "lucide-react";
 import { cn } from "@/utils/cn";
 import type { PCBViewerData } from "../types/hardware-viewer";
@@ -14,15 +14,6 @@ export function PcbViewer({ filePath, pcbData }: PcbViewerProps) {
   const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<PCBViewerData | null>(null);
   const [activeLayer, setActiveLayer] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (pcbData) {
-      setData(pcbData as PCBViewerData);
-      setIsLoading(false);
-    } else {
-      loadPCBData();
-    }
-  }, [pcbData, filePath]);
 
   const loadPCBData = async () => {
     try {
@@ -40,6 +31,15 @@ export function PcbViewer({ filePath, pcbData }: PcbViewerProps) {
       setIsLoading(false);
     }
   };
+
+  useState(() => {
+    if (pcbData) {
+      setData(pcbData as PCBViewerData);
+      setIsLoading(false);
+    } else {
+      loadPCBData();
+    }
+  }, [pcbData, filePath]);
 
   if (isLoading) {
     return (
@@ -70,30 +70,35 @@ export function PcbViewer({ filePath, pcbData }: PcbViewerProps) {
     );
   }
 
+  if (!data) {
+    return (
+      <div className="flex h-full items-center justify-center">
+        <p className="text-sm text-text-light">No PCB data available</p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex h-full flex-col">
       <div className="border-b border-border bg-secondary-bg px-4 py-2">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <span className="text-sm font-medium text-text">PCB Viewer</span>
-            <span className="text-xs text-text-lighter">{data?.components.length ?? 0} components</span>
-            <span className="text-xs text-text-lighter">{data?.nets.length ?? 0} nets</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Layers className="h-4 w-4 text-text-lighter" />
-            <select
-              value={activeLayer ?? ""}
-              onChange={(e) => setActiveLayer(e.target.value || null)}
-              className="rounded border border-border bg-primary-bg px-2 py-1 text-xs text-text"
-            >
-              <option value="">All Layers</option>
-              {data?.layers.map((layer) => (
-                <option key={layer} value={layer}>
-                  {layer}
-                </option>
-              ))}
-            </select>
-          </div>
+          <span className="text-sm font-medium text-text">PCB Viewer</span>
+          <span className="text-xs text-text-lighter">{data?.components.length ?? 0} components</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <Layers className="h-4 w-4 text-text-lighter" />
+          <select
+            value={activeLayer ?? ""}
+            onChange={(e) => setActiveLayer(e.target.value || null)}
+            className="rounded border border-border bg-primary-bg px-2 py-1 text-xs text-text"
+          >
+            <option value="">All Layers</option>
+            {data?.layers.map((layer) => (
+              <option key={layer} value={layer}>
+                {layer}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 
